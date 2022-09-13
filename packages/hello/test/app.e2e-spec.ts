@@ -38,7 +38,7 @@ describe('AppController (e2e)', () => {
   it('getHello (gRPC)', async () => {
     return new Promise<void>((resolve, reject) => {
       client.getHello({}, function (err, res) {
-        if (err) return resolve(err);
+        if (err) return reject(err);
         expect(res).toEqual({ message: 'Hello World!' });
         resolve();
       });
