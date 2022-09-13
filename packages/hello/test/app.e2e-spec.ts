@@ -1,15 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication, INestMicroservice } from '@nestjs/common';
-import * as request from 'supertest';
+import { INestMicroservice } from '@nestjs/common';
 import { AppModule } from './../src/app.module';
 import { grpcClientOptions } from 'shared/lib/options/hello.grpc';
 import * as ProtoLoader from '@grpc/proto-loader';
 import * as GRPC from '@grpc/grpc-js';
-import { Hello } from 'shared/lib/generated/hello';
 import { ServiceClient } from '@grpc/grpc-js/build/src/make-client';
+import {
+  HELLO_PACKAGE_NAME,
+  HELLO_SERVICE_NAME,
+} from 'shared/lib/generated/hello';
 
 describe('AppController (e2e)', () => {
-  let server;
   let app: INestMicroservice;
   let client: ServiceClient;
 
@@ -24,9 +25,10 @@ describe('AppController (e2e)', () => {
 
     const proto = ProtoLoader.loadSync(grpcClientOptions.options.protoPath);
     const protoGRPC = GRPC.loadPackageDefinition(proto);
-    const packageGRPC = protoGRPC.hello as GRPC.GrpcObject;
-    const serviceGRPC =
-      packageGRPC.HelloService as GRPC.ServiceClientConstructor;
+    const packageGRPC = protoGRPC[HELLO_PACKAGE_NAME] as GRPC.GrpcObject;
+    const serviceGRPC = packageGRPC[
+      HELLO_SERVICE_NAME
+    ] as GRPC.ServiceClientConstructor;
     client = new serviceGRPC(
       grpcClientOptions.options.url,
       GRPC.credentials.createInsecure(),
