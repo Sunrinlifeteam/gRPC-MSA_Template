@@ -23,10 +23,11 @@ describe('AppController (e2e)', () => {
     await app.init();
 
     const proto = ProtoLoader.loadSync(grpcClientOptions.options.protoPath);
-    const protoGRPC = GRPC.loadPackageDefinition(proto) as any;
-    const serviceConstructor: GRPC.ServiceClientConstructor =
-      protoGRPC.hello.HelloService;
-    client = new serviceConstructor(
+    const protoGRPC = GRPC.loadPackageDefinition(proto);
+    const packageGRPC = protoGRPC.hello as GRPC.GrpcObject;
+    const serviceGRPC =
+      packageGRPC.HelloService as GRPC.ServiceClientConstructor;
+    client = new serviceGRPC(
       grpcClientOptions.options.url,
       GRPC.credentials.createInsecure(),
     );
