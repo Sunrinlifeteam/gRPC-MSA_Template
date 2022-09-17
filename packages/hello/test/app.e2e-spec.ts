@@ -22,6 +22,7 @@ describe('AppController (e2e)', () => {
     app = moduleFixture.createNestMicroservice(grpcClientOptions);
 
     await app.init();
+    await app.listen();
 
     const proto = ProtoLoader.loadSync(grpcClientOptions.options.protoPath);
     const protoGRPC = GRPC.loadPackageDefinition(proto);
