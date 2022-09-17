@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "rmagur1203 <41236839+rmagur1203@users.noreply.github.com>",
-  "homepage": "https://github.com/2022-WHO-ARE-WE/cling-server#readme",
+  "homepage": "https://github.com/Sunrinlifeteam/gRPC-MSA_Template#readme",
   "license": "ISC",
   "directories": {
     "lib": "lib",
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/2022-WHO-ARE-WE/cling-server.git"
+    "url": "git+https://github.com/Sunrinlifeteam/gRPC-MSA_Template.git"
   },
   "scripts": {
     "build": "rimraf ./lib && npm run build:proto && npm run build:tsc && npm run build:copy",
@@ -23,7 +23,7 @@
     "build:proto": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto.cmd --ts_proto_opt=nestJs=true --ts_proto_out=./src/generated -I ./src/protocols ./src/protocols/*.proto"
   },
   "bugs": {
-    "url": "https://github.com/2022-WHO-ARE-WE/cling-server/issues"
+    "url": "https://github.com/Sunrinlifeteam/gRPC-MSA_Template/issues"
   },
   "dependencies": {
     "@nestjs/microservices": "^9.0.11",
