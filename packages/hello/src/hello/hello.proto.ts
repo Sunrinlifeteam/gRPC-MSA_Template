@@ -1,22 +1,24 @@
 /* eslint-disable */
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
-import { Empty } from "./google/protobuf/empty";
 
 export const protobufPackage = "hello";
 
-export interface Hello {
+export interface GetHelloRequest {
+}
+
+export interface GetHelloResponse {
   message: string;
 }
 
 export const HELLO_PACKAGE_NAME = "hello";
 
 export interface HelloServiceClient {
-  getHello(request: Empty): Observable<Hello>;
+  getHello(request: GetHelloRequest): Observable<GetHelloResponse>;
 }
 
 export interface HelloServiceController {
-  getHello(request: Empty): Promise<Hello> | Observable<Hello> | Hello;
+  getHello(request: GetHelloRequest): Promise<GetHelloResponse> | Observable<GetHelloResponse> | GetHelloResponse;
 }
 
 export function HelloServiceControllerMethods() {

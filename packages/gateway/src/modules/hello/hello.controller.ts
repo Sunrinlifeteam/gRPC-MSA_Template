@@ -8,11 +8,11 @@ import {
 import { ClientGrpc } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import {
-  Hello,
+  GetHelloResponse,
   HelloServiceClient,
   HELLO_PACKAGE_NAME,
   HELLO_SERVICE_NAME,
-} from 'shared/lib/generated/hello';
+} from './hello.proto';
 
 @Injectable()
 @Controller('hello')
@@ -29,7 +29,7 @@ export class HelloController implements OnModuleInit {
   }
 
   @Get('/')
-  getHello(): Observable<Hello> {
+  getHello(): Observable<GetHelloResponse> {
     return this.helloService.getHello({});
   }
 }

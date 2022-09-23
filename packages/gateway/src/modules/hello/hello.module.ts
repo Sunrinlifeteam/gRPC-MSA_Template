@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { HELLO_PACKAGE_NAME } from 'shared/lib/generated/hello';
-import { grpcClientOptions as grpcHelloOptions } from 'shared/lib/options/hello.grpc';
+import { HELLO_PACKAGE_NAME } from './hello.proto';
 import { HelloController } from './hello.controller';
+
+export const serviceHost = 'localhost';
+export const servicePort = 10001;
 
 @Module({
   imports: [
@@ -10,7 +12,11 @@ import { HelloController } from './hello.controller';
       {
         name: HELLO_PACKAGE_NAME,
         transport: Transport.GRPC,
-        options: grpcHelloOptions.options,
+        options: {
+          url: `${serviceHost}:${servicePort}`,
+          package: 'hello',
+          protoPath: 'src/hello/hello.proto',
+        },
       },
     ]),
   ],

@@ -1,17 +1,18 @@
 import { Controller } from '@nestjs/common';
 import { HelloService } from './hello.service';
 import {
-  Hello,
+  GetHelloRequest,
+  GetHelloResponse,
   HelloServiceController,
   HelloServiceControllerMethods,
-} from 'shared/lib/generated/hello';
+} from './hello.proto';
 
 @Controller()
 @HelloServiceControllerMethods()
 export class HelloController implements HelloServiceController {
   constructor(private readonly helloService: HelloService) {}
 
-  getHello(): Hello {
+  getHello(req: GetHelloRequest): GetHelloResponse {
     return { message: this.helloService.getHello() };
   }
 }
